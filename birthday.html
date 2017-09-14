@@ -1,16 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<style>
-	body {text-align:center;}
-	#div {margin-top:200px;}
-	.s {font-size:18px;font-weight:bolder;}
-</style>
-</head>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {text-align:center;}
+			#div {margin-top:200px;}
+			.s {font-size:18px;font-weight:bolder;}
+			*{margin:0;padding:0}
+			html,body{height:100%}
+			#box{width: 100%;
+				height: 100%;
+				background-color:black;
+				position: absolute;
+				z-index: -1;
+				overflow: hidden;
+				top: 0;
+				left: 0;
+			}
+			span{
+				border-radius: 100%;
+				background-color: white;			
+				position: absolute;				
+				}
+		</style>
+	</head>
 
 <body>
+	<div id="box"></div>
 	<div id="div">
 		<img src="img/0.png" />
 		<img src="img/8.png" />
@@ -23,9 +40,34 @@
 		秒
 	</div>
 	<div id="screen" class="s"></div>
-	
+	</body>
 </html>
 <script>
+	document.body.style.color = "#f00"
+	var starcount=1000;
+	var j=0;
+	for(var i=0;i<starcount;i++){
+		document.querySelector('div').appendChild(document.createElement('span'));			//生成span
+	}	
+	function start(){		
+		var star=document.getElementById("box").children;							//style 写入
+		[].forEach.call(star, function(item,index) {			//[].forEach.call=Array.prototype.forEach.call
+	    	item.style.left=parseInt(Math.random()*100)+'%';
+			item.style.top=parseInt(Math.random()*100)+'%';
+			item.style.width=Math.floor(Math.random()*4+1)+"px";
+			item.style.height=item.style.width;		
+//			item.style.background="snow.gif"
+			setInterval(function(){
+					j++;
+					if(j>2){
+						j=0;
+					}
+					item.style.boxShadow='0px 0px 3px'+" "+ j+'px white';
+				},300)
+			//item.style.boxShadow='0px 0px 3px'+" "+ j+'px white';		
+		})
+	}	
+	start();
 	 var list = document.getElementsByTagName("img");
 	 fun();
 	 setInterval(fun,1000);
@@ -79,4 +121,5 @@
 	 	}
 	 	return time;
 	 }
+
 </script>
