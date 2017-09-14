@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body {text-align:center;}
+	#div {margin-top:200px;}
+	.s {font-size:18px;font-weight:bolder;}
+</style>
+</head>
+
+<body>
+	<div id="div">
+		<img src="img/0.png" />
+		<img src="img/8.png" />
+		时
+		<img src="img/1.png" />
+		<img src="img/5.png" />
+		分
+		<img src="img/0.png" />
+		<img src="img/9.png" />
+		秒
+	</div>
+	<div id="screen" class="s"></div>
+	
+</html>
+<script>
+	 var list = document.getElementsByTagName("img");
+	 fun();
+	 setInterval(fun,1000);
+	 function imgs(num,f,s){
+	 	if(num < 10){
+	 	 	list[f].src = "img/0.png";
+	 	 	list[s].src = "img/"+num+".png";
+	 	 }else{
+	 	 	list[f].src = "img/"+parseInt(num/10)+".png";
+	 	 	list[s].src = "img/"+parseInt(num%10)+".png";
+	 	 }
+	 }
+	 function fun(){
+	 	var time = new Date();
+	 	 var h = time.getHours();
+	 	 var mi = time.getMinutes();
+	 	 var se = time.getSeconds();
+	 	 imgs(h,0,1);
+	 	 imgs(mi,2,3);
+	 	 imgs(se,4,5);
+	 	 
+	 }
+	 //定时器的使用
+	var di = document.getElementById("screen");
+	dingshi();
+	var timer = setInterval(dingshi,1000);
+	function dingshi(){
+		var stime = new Date();
+		var etime = new Date("2017-10-05 00:00:00");
+		var time = diff(stime,etime);
+		var hour = parseInt(time/3600);
+		time = time - 3600*hour;
+		var mi = parseInt(time/60);
+		time = time - 60*mi;
+		var se = parseInt(time);
+		hour = geshi(hour);
+		mi = geshi(mi);
+		se = geshi(se);
+		di.innerHTML = "距离斜斜生日还有 "+hour +"小时"+mi+"分"+se+"秒";
+		if(parseInt(hour) <= 0 && parseInt(mi) <=0 & parseInt(se)<= 0){
+			clearInterval(timer);
+			di.innerHTML = "生日快乐~";
+		}
+	}
+	function diff(start,end){
+		return (end.getTime()-start.getTime())/1000;
+	}
+	function geshi(time){
+	 	if(time < 10){
+	 		time ="0" + time;
+	 	}
+	 	return time;
+	 }
+</script>
